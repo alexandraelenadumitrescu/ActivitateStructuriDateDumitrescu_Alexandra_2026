@@ -68,6 +68,7 @@ void updateBrandName(struct Product* product,char* brand) {
 		free(product->brand);
 		product->brand = (char*)malloc(sizeof(char) * strlen(brand) + 1);
 		strcpy(product->brand, brand);
+		
 	}
 }
 //5. Conditional Logic(Comparison)
@@ -96,6 +97,71 @@ void dezalocare(struct Product* product) {
 }
 
 
+
+//
+//1. Deep Copy Cloning
+//Write a function struct Product copyProduct(struct Product original) that creates a completely independent clone.
+//
+//It must allocate new memory for the brand and copy the contents.
+//
+//Modifying the brand of the clone should not affect the brand of the original.
+//
+//Why ? This prevents "Shallow Copy" bugs where two structs point to the same memory address.
+// 
+struct Product copyProduct(struct Product original) {
+	struct Product product;
+	product.modelCode = original.modelCode;
+	product.brand = (char*)malloc(sizeof(char) * strlen(original.brand) + 1);
+	strcpy(product.brand, original.brand);
+	product.price = original.price;
+	product.stock = original.stock;
+	product.energyClass = original.energyClass;
+	return product;
+}
+
+
+//2. Inventory Value Calculation
+//Write a function float calculateTotalStockValue(struct Product* inventory, int size) that :
+//
+//	Takes an array of Products.
+//
+//	Returns the sum of(Price × Stock) for all items.
+//
+//	Use a loop to traverse the pointer / array.
+//
+//	3. "Filter" by Energy Class(Sub - Arrays)
+//	Write a function struct Product* getProductsByClass(struct Product* inventory, int size, char targetClass, int* resultSize) that :
+//
+//	Finds all products with a specific energyClass(e.g., 'A').
+//
+//	Dynamically allocates a new array of the correct size to hold only those products.
+//
+//	Uses the resultSize pointer to tell the caller how many items were found.
+//
+//	Challenge: Each product in this new array must be a Deep Copy of the original.
+//
+//	4. Sorting the Catalog
+//	Write a function void sortProductsByPrice(struct Product* inventory, int size) :
+//
+//	Sort the array in ascending order of price.
+//
+//	You can use a simple Bubble Sort or qsort from <stdlib.h>.
+//
+//	Remember that when you swap two structs, the pointers to the brand names swap too!
+//
+//	5. Bulk Deallocation
+//	Write a function void destroyInventory(struct Product** inventory, int* size) :
+//
+//	It should loop through the array, call your dezalocare function for each element, and then free the array itself.
+//
+//	Set the array pointer to NULL and size to 0 at the end.
+
+
+
+
+
+
+
 int main() {
 	struct Product p;
 	p = initializare(100, "Samsung", 999.99, 46, 'A');
@@ -106,10 +172,20 @@ int main() {
 	struct Product p2;
 	p1 = initializare(100, "Produs 1 marca", 999.99, 46, 'A');
 	p2 = initializare(100, "Produs 2 marca", 999.99, 46, 'A');
-	printf("%s", getCheaperProduct(p1,p2));
+	printf("%s\n", getCheaperProduct(p1,p2));
+	struct Product copie;
+	struct Product shallow = p;
+	printf("%p adresa shallow copy\n", shallow.brand);
+	printf("%p adresa struct principala\n", p.brand);
+	copie = copyProduct(p);
+	printf("%p adresa deep copy\n", copie.brand);
+	printf("%p adresa struct principala\n", p.brand);
+	
+	
 	dezalocare(&p);
 	dezalocare(&p1);
 	dezalocare(&p2);
+
 
 	return 0;
 }
