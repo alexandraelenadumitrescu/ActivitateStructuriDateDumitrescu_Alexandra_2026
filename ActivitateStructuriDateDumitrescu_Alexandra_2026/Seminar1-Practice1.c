@@ -200,12 +200,25 @@ void afisareVector(struct Product* products, int size) {
 int myComparisonFunction(const void* x, const void* y) {
 	return (*(int*)x - *(int*)y);
 }
-void sortProductsByPrice(struct Product* inventory, int size) {
+
+int comparatorPret(const struct Product* x, const struct Product* y) {
+	//return (*(int*)x - *(int*)y);
+	return x->price - y->price;
+}
+
+void sortVector() {
 	int v[3] = { 10,9,11 };
 
 	qsort(v,3,sizeof(int),myComparisonFunction);
 
 	printf("%d", v[0]);
+}
+void sortProductsByPrice(struct Product* inventory, int size) {
+	
+
+	qsort(inventory, size, sizeof(struct Product), comparatorPret);
+
+	
 }
 
 
@@ -246,10 +259,10 @@ int main() {
 	p3 = initializare(100, "Samsung", 10, 1, 'A');
 	struct Product* inventory = NULL;
 	inventory=(struct Product*)malloc(sizeof(struct Product) * 4);
-	inventory[0] = initializare(100, "Samsung", 10, 1, 'A');
-	inventory[1] = initializare(100, "Samsung", 10, 1, 'B');
-	inventory[2] = initializare(100, "Samsung", 10, 1, 'C');
-	inventory[3] = initializare(100, "Samsung", 10, 1, 'A');
+	inventory[0] = initializare(100, "Samsung", 1000, 1, 'A');
+	inventory[1] = initializare(100, "Samsung", 50, 1, 'B');
+	inventory[2] = initializare(100, "Samsung", 20, 1, 'C');
+	inventory[3] = initializare(100, "Samsung", 120, 1, 'A');
 	printf("total price of inventory: %5.2f\n", calculateTotalStockValue(inventory, 3));
 	afisareVector(inventory, 4);
 	int size;
@@ -257,7 +270,9 @@ int main() {
 	
 	doarA = getProductsByClass(inventory, 4, 'A', &size);
 	afisareVector(doarA, size);
+	printf("--------------\n");
 	sortProductsByPrice(inventory, 4);
+	afisareVector(inventory, 4);
 
 
 	
