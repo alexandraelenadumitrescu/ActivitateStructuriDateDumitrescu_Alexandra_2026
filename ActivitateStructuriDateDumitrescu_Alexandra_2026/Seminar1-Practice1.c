@@ -129,6 +129,20 @@ struct Product copyProduct(struct Product original) {
 //
 //	Use a loop to traverse the pointer / array.
 //
+// 
+// 
+float calculateTotalStockValue(struct Product* inventory, int size) {
+	float total = 0;
+	for (int i = 0;i < size;i++) {
+		total += inventory[i].price * inventory[i].stock;
+		
+	}
+	return total;
+}
+
+
+
+
 //	3. "Filter" by Energy Class(Sub - Arrays)
 //	Write a function struct Product* getProductsByClass(struct Product* inventory, int size, char targetClass, int* resultSize) that :
 //
@@ -139,6 +153,40 @@ struct Product copyProduct(struct Product original) {
 //	Uses the resultSize pointer to tell the caller how many items were found.
 //
 //	Challenge: Each product in this new array must be a Deep Copy of the original.
+
+struct Product* getProductsByClass(struct Product* inventory, int size, char targetClass, int* resultSize) {
+	int newSize = 0;
+	for (int i = 0;i < size;i++) {
+		if (inventory[i].energyClass == targetClass) {
+			newSize++;
+		}
+	}
+	struct Product* products = NULL;
+	products = (struct Product*)malloc(sizeof(struct Product) * newSize);
+
+	int it=0;
+	for (int i = 0;i < size;i++) {
+		
+		if (inventory[i].energyClass == targetClass) {
+			products[it] = copyProduct(inventory[i]);
+			it++;
+		}
+	}
+
+	
+	*resultSize = newSize;
+	return products;
+
+}
+
+void afisareVector(struct Product* products, int size) {
+	for (int i = 0;i < size;i++) {
+		afisare(products[i]);
+	}
+}
+
+
+
 //
 //	4. Sorting the Catalog
 //	Write a function void sortProductsByPrice(struct Product* inventory, int size) :
@@ -164,7 +212,7 @@ struct Product copyProduct(struct Product original) {
 
 int main() {
 	struct Product p;
-	p = initializare(100, "Samsung", 999.99, 46, 'A');
+	p = initializare(100, "Samsung", 10, 1, 'A');
 	afisare(p);
 	updateBrandName(&p, "Apple");
 	afisare(p);
@@ -180,6 +228,25 @@ int main() {
 	copie = copyProduct(p);
 	printf("%p adresa deep copy\n", copie.brand);
 	printf("%p adresa struct principala\n", p.brand);
+	struct Product p3;
+	p3 = initializare(100, "Samsung", 10, 1, 'A');
+	struct Product* inventory = NULL;
+	inventory=(struct Product*)malloc(sizeof(struct Product) * 4);
+	inventory[0] = initializare(100, "Samsung", 10, 1, 'A');
+	inventory[1] = initializare(100, "Samsung", 10, 1, 'B');
+	inventory[2] = initializare(100, "Samsung", 10, 1, 'C');
+	inventory[3] = initializare(100, "Samsung", 10, 1, 'A');
+	printf("total price of inventory: %5.2f\n", calculateTotalStockValue(inventory, 3));
+	afisareVector(inventory, 4);
+	int size;
+	struct Product* doarA = NULL;
+	
+	doarA = getProductsByClass(inventory, 4, 'A', &size);
+	afisareVector(doarA, size);
+
+
+
+	
 	
 	
 	dezalocare(&p);
