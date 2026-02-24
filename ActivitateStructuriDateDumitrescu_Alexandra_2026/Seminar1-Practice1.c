@@ -232,6 +232,15 @@ void sortProductsByPrice(struct Product* inventory, int size) {
 //	Set the array pointer to NULL and size to 0 at the end.
 
 
+void destroyInventory(struct Product** inventory, int* size) {
+	for (int i = 0;i < *size;i++) {
+		free((*inventory)[i].brand);
+		(*inventory)[i].brand = NULL;
+		
+	}
+}
+
+
 
 
 
@@ -273,14 +282,14 @@ int main() {
 	printf("--------------\n");
 	sortProductsByPrice(inventory, 4);
 	afisareVector(inventory, 4);
-
-
+	int a = 4;
+	destroyInventory(&inventory, &a);
 	
 	
 	
-	dezalocare(&p);
+	/*dezalocare(&p);
 	dezalocare(&p1);
-	dezalocare(&p2);
+	dezalocare(&p2);*/
 
 
 	return 0;
