@@ -238,6 +238,9 @@ void destroyInventory(struct Product** inventory, int* size) {
 		(*inventory)[i].brand = NULL;
 		
 	}
+	free(*inventory);
+	*inventory = NULL;
+	*size = 0;
 }
 
 
