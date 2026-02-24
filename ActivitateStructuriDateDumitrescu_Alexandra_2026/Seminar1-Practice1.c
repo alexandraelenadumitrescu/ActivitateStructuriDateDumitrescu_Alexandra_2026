@@ -196,7 +196,21 @@ void afisareVector(struct Product* products, int size) {
 //	You can use a simple Bubble Sort or qsort from <stdlib.h>.
 //
 //	Remember that when you swap two structs, the pointers to the brand names swap too!
-//
+// 
+int myComparisonFunction(const void* x, const void* y) {
+	return (*(int*)x - *(int*)y);
+}
+void sortProductsByPrice(struct Product* inventory, int size) {
+	int v[3] = { 10,9,11 };
+
+	qsort(v,3,sizeof(int),myComparisonFunction);
+
+	printf("%d", v[0]);
+}
+
+
+
+
 //	5. Bulk Deallocation
 //	Write a function void destroyInventory(struct Product** inventory, int* size) :
 //
@@ -243,7 +257,7 @@ int main() {
 	
 	doarA = getProductsByClass(inventory, 4, 'A', &size);
 	afisareVector(doarA, size);
-
+	sortProductsByPrice(inventory, 4);
 
 
 	
