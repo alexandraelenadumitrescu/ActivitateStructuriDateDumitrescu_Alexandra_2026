@@ -77,6 +77,17 @@ void sortGadgetsByBattery(struct Gadget* gadgets, int size) {
 //The Trap : You need to loop through the array to free each modelName string before freeing the array container.
 //
 //The Goal : Prove you know the exact syntax to dereference the double pointer to access the array, and how to pass the address of a specific element[i] to free().Finally, set the array to NULL and the size to 0.
+void dezalocareVector(struct Gadget** arr, int* size) {
+	
+	for (int i = 0;i < *size;i++) {
+		free(*(arr)[i]->modelName);
+		
+		*(arr)[i]->modelName = NULL;
+	}
+	free(*arr);
+	*arr = NULL;
+	*size = 0;
+}
 int main() {
 	struct Gadget* gadgets = (struct Gadget*)malloc(sizeof(struct Gadget) * 2);
 	gadgets[0] = init(10, "haide", 10, 'U');
