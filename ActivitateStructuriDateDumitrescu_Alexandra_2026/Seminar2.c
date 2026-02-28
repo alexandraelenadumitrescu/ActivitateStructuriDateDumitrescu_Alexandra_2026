@@ -60,15 +60,17 @@ void copiazaAnumiteElemente(struct Telefon* vector, char nrElemente, float prag,
 	//este creat un nou vector cu elementele care indeplinesc acea conditie
 	int count = 0;
 	for (int i = 0;i < nrElemente;i++) {
-		if (prag > (*vectorNou)[i].pret) {
+		if (prag > vector[i].pret) {
 			count++;
 		}
 	}
 	(*vectorNou) = (struct Telefon*)malloc(sizeof(struct Telefon) * count);
 	int j = 0;
 	for (int i = 0;i < nrElemente;i++) {
-		(*vectorNou)[j] = copiaza(vector[i]);
-		j++;
+		if (prag > (*vectorNou)[i].pret) {
+			(*vectorNou)[j] = copiaza(vector[i]);
+			j++;
+		}
 	}
 	*dimensiune = j;
 	
@@ -88,6 +90,13 @@ struct Telefon getPrimulElementConditionat(struct Telefon* vector, int nrElement
 int main() {
 	struct Telefon t1 = initializare(10, 10, "samsung", 100, 's');
 	afisare(t1);
+	int size = 3;
+	struct Telefon* telefoane = (struct Telefon*)malloc(sizeof(struct Telefon) * size);
+	telefoane[0] = t1;
+	telefoane[1] = initializare(10, 10, "samsung", 300, 's');
+	telefoane[2] = initializare(10, 10, "samsung", 200, 's');
+	afisareVector(telefoane, size);
+
 
 
 	return 0;
