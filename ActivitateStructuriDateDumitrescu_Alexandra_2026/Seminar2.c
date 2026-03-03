@@ -96,8 +96,12 @@ int main() {
 	telefoane[1] = initializare(10, 10, "samsung", 300, 's');
 	telefoane[2] = initializare(10, 10, "samsung", 200, 's');
 	afisareVector(telefoane, size);
-
-
+	struct Telefon deep = copiaza(t1);
+	printf("%p t1\n ", t1.producator);
+	struct Telefon shallow = t1;
+	printf("%p shallow copy \n", shallow.producator);
+	printf("%p shallow copy vector\n", telefoane[0].producator);
+	printf("%p deep copy\n",deep.producator);
 
 	return 0;
 }
