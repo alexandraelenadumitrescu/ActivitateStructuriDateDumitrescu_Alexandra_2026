@@ -54,7 +54,7 @@ void dezalocare(struct Telefon** vector, int* nrElemente) {
 	//dezalocam elementele din vector si vectorul
 }
 
-void copiazaAnumiteElemente(struct Telefon* vector, char nrElemente, float prag, struct Telefon** vectorNou, int* dimensiune) {
+void copiazaAnumiteElemente(struct Telefon* vector, int nrElemente, float prag, struct Telefon** vectorNou, int* dimensiune) {
 	//parametrul prag poate fi modificat in functie de 
 	// tipul atributului ales pentru a indeplini o conditie
 	//este creat un nou vector cu elementele care indeplinesc acea conditie
@@ -67,7 +67,7 @@ void copiazaAnumiteElemente(struct Telefon* vector, char nrElemente, float prag,
 	(*vectorNou) = (struct Telefon*)malloc(sizeof(struct Telefon) * count);
 	int j = 0;
 	for (int i = 0;i < nrElemente;i++) {
-		if (prag > (*vectorNou)[i].pret) {
+		if (prag > vector[i].pret) {
 			(*vectorNou)[j] = copiaza(vector[i]);
 			j++;
 		}
@@ -80,21 +80,25 @@ struct Telefon getPrimulElementConditionat(struct Telefon* vector, int nrElement
 	//trebuie cautat elementul care indeplineste o conditie
 	//dupa atributul de tip char*. Acesta este returnat.
 	struct Telefon s;
-	s.id = 1;
+	for (int i = 0;i < nrElemente;i++) {
+		if (strcmp(vector[i].producator, conditie)==0) {
+			return copiaza(vector[i]);
+		}
+	}
 
-	return s;
+	
 }
 	
 
 
 int main() {
-	struct Telefon t1 = initializare(10, 10, "samsung", 100, 's');
+	struct Telefon t1 = initializare(10, 10, "apple", 100, 's');
 	afisare(t1);
 	int size = 3;
 	struct Telefon* telefoane = (struct Telefon*)malloc(sizeof(struct Telefon) * size);
 	telefoane[0] = t1;
 	telefoane[1] = initializare(10, 10, "samsung", 300, 's');
-	telefoane[2] = initializare(10, 10, "samsung", 200, 's');
+	telefoane[2] = initializare(20, 10, "apple", 200, 's');
 	afisareVector(telefoane, size);
 	struct Telefon deep = copiaza(t1);
 	printf("%p t1\n ", t1.producator);
@@ -102,6 +106,14 @@ int main() {
 	printf("%p shallow copy \n", shallow.producator);
 	printf("%p shallow copy vector\n", telefoane[0].producator);
 	printf("%p deep copy\n",deep.producator);
+	struct Telefon* telefoaneCopie= (struct Telefon*)malloc(sizeof(struct Telefon) * 2);
+	telefoaneCopie = copiazaPrimeleNElemente(telefoane, size, 2);
+	afisareVector(telefoaneCopie, 2);
+	struct Telefon* telefoaneAnumite;
+	copiazaAnumiteElemente(telefoane, 3, 250, &telefoaneAnumite, &size);
+	afisareVector(telefoaneAnumite, size);
+	afisare(getPrimulElementConditionat(telefoane, size, "apple"));
+
 
 	return 0;
 }
