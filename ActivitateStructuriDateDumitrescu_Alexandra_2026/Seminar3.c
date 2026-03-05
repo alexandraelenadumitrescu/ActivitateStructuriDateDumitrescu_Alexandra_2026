@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -42,6 +42,8 @@ void adaugaMasinaInVector(Masina** masini, int * nrMasini, Masina masinaNoua) {
 	//(*masini) = temp;
 	//o sa sterg doar zona de memorie in care aveam vectorul, dar nu voi sterge pointerii
 	free(*masini);
+
+
 	(*masini) = temp;//nu mai aloc e deja in heap alocata pentru temp
 	(*nrMasini)++;
 
@@ -67,15 +69,18 @@ Masina citireMasinaFisier(FILE* file) {
 	
 
 	char* aux = (strtok(NULL, sep));
-	m.model = (char*)malloc(sizeof(char) * strlen(aux) + 1);
+	m.model = (char*)malloc(sizeof(char) * (strlen(aux) + 1));
 	strcpy(m.model, aux);
 
-	free(aux);
+	
 
 	aux = (strtok(NULL, sep));
-	m.numeSofer = (char*)malloc(sizeof(char) * strlen(aux) + 1);
+	m.numeSofer = (char*)malloc(sizeof(char) * (strlen(aux) + 1));
 	strcpy(m.numeSofer, aux);
 	m.serie = strtok(NULL, sep)[0];
+
+
+
 
 	return m;
 }
@@ -85,7 +90,7 @@ Masina* citireVectorMasiniFisier(const char* numeFisier, int* nrMasiniCitite) {
 	//prin apelul repetat al functiei citireMasinaFisier()
 	//numarul de masini este determinat prin numarul de citiri din fisier
 	//ATENTIE - la final inchidem fisierul/stream-ul
-	FILE* file = fopen("numeFisier", "r");
+	FILE* file = fopen(numeFisier, "r");
 	if (!file) {
 		printf("eroare la deschidere");
 		return;
@@ -94,7 +99,7 @@ Masina* citireVectorMasiniFisier(const char* numeFisier, int* nrMasiniCitite) {
 		Masina* vectorMasini = NULL;
 		while (!feof(file)) {
 			Masina masina=citireMasinaFisier(file);
-			(*nrMasiniCitite)++;
+			
 			adaugaMasinaInVector(&vectorMasini, nrMasiniCitite,masina);
 		}
 		return vectorMasini;
@@ -103,14 +108,14 @@ Masina* citireVectorMasiniFisier(const char* numeFisier, int* nrMasiniCitite) {
 
 }
 
-void dezalocareVectorMasini(Masina** vector, int* nrMasini) {
-	//este dezalocat intreg vectorul de masini
-
-}
+//void dezalocareVectorMasini(Masina** vector, int* nrMasini) {
+//	//este dezalocat intreg vectorul de masini
+//
+//}
 
 int main() {
 	int nrMasini = 0;
-	Masina* masini=citireVectorMasiniFisier("masins.txt",&nrMasini);
+	Masina* masini=citireVectorMasiniFisier("masini.txt",&nrMasini);
 	afisareVectorMasini(masini, nrMasini);
 
 
