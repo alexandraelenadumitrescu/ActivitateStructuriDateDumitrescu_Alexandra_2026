@@ -75,7 +75,7 @@ Carte* citireVector(const char* caleFisier,int* nrCartiCitite) {
 		}
 		return mi;
 	}
-	
+	fclose(f);
 }
 
 
@@ -100,13 +100,21 @@ void afisareVector(Carte* carti, int size) {
 //
 //Memory Management : Ensure all allocated memory is properly 
 // freed before the program exits.
-
+void dezalocare(Carte** vector, int* nr) {
+	for (int i = 0;i < (*nr);i++) {
+		free((*vector)[i].titlu);
+		free((*vector)[i].autor);
+	}
+	free(*vector);
+	*vector = NULL;
+	*nr = 0;
+}
 
 int main() {
 	int nr = 0;
 	Carte* carti = citireVector("library_data.txt", &nr);
 	afisareVector(carti, nr);
-
+	dezalocare(&carti, &nr);
 
 
 	return 0;
