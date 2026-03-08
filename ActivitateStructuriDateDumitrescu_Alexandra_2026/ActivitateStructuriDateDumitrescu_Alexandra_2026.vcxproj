@@ -137,6 +137,7 @@
     <ClCompile Include="Seminar3-Practice1.c" />
     <ClCompile Include="Seminar3-Practice2.c" />
     <ClCompile Include="Seminar3-Practice3.c" />
+    <ClCompile Include="Seminar3-Practice4.c" />
     <ClCompile Include="Seminar3.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
