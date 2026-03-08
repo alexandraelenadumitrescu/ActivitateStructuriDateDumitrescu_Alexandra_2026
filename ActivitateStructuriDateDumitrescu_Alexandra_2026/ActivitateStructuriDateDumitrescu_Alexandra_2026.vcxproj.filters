@@ -42,5 +42,8 @@
     <ClCompile Include="Seminar3-Practice1.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Seminar3-Practice2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
