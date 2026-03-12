@@ -80,7 +80,11 @@ void adaugaMasinaInLista(Nod** cap, Masina masinaNoua) {
 	//adauga la final in lista primita o noua masina pe care o primim ca parametru
 }
 
-void adaugaLaInceputInLista(/*lista de masini*/ Masina masinaNoua) {
+void adaugaLaInceputInLista(Nod** cap, Masina masinaNoua) {
+	Nod* nodNou = (Nod*)malloc(sizeof(Nod));
+	nodNou->info = masinaNoua;
+	nodNou->next = *cap;
+	*cap = nodNou;
 	//adauga la inceputul listei o noua masina pe care o primim ca parametru
 }
 
@@ -136,7 +140,7 @@ float calculeazaPretMediu(Nod* cap) {
 void stergeMasiniDinSeria(Nod** cap,char serieCautata) {
 	//sterge toate masinile din lista care au seria primita ca parametru.
 	//tratati situatia ca masina se afla si pe prima pozitie, si pe ultima pozitie
-
+	//de incercat fara primul while
 		while ((*cap) && (*cap)->info.serie == serieCautata) {
 			Nod* temp = *cap;
 			(*cap) = temp->next;
