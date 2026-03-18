@@ -184,6 +184,7 @@ char* getNumeSoferMasinaScumpa(/*lista dublu inlantuita*/) {
 int main() {
 	ListaDubla listaDubla = citireLDMasiniDinFisier("masini.txt");
 	afisareListaMasini(listaDubla);
+	printf("%5.2f", calculeazaPretMediu(listaDubla));
 	dezalocareLDMasini(&listaDubla);
 	printf("afisare lista dubla de masini dupa dezalocare\n");
 	afisareListaMasini(listaDubla);
