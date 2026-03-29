@@ -1,0 +1,5 @@
+1,350,45.99,The Great Gatsby,F. Scott Fitzgerald,A
+2,1200,89.50,War and Peace,Leo Tolstoy,B
+10,200,15.25,The Little Prince,Antoine de Saint-Exupery,C
+4,432,29.90,1984,George Orwell,A
+5,500,55.00,The Hobbit,J.R.R. Tolkien,S
