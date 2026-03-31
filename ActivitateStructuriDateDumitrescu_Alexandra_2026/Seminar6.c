@@ -59,7 +59,20 @@ struct Nod {
 };
 
 
+typedef struct NodDublu NodDublu{
+}
+struct NodDublu {
+	Masina info;
+	NodDublu* next;
+	NodDublu* prev;
+};
 
+struct ListaDubluInlantuita {
+	NodDublu* first;
+	NodDublu* last;
+
+};
+typedef struct ListaDubluInlantuita ListaD;
 
 
 void pushStack(Nod** cap, Masina masina) {
@@ -100,11 +113,12 @@ void* citireStackMasiniDinFisier(const char* numeFisier) {
 
 
 	while (!feof(file)) {
-		Masina masina = citireMasinaDinFisier(numeFisier);
+		Masina masina = citireMasinaDinFisier(file);
 		pushStack(&cap, masina);
 
 	}
 	fclose(file);
+	return cap;
 }
 
 void dezalocareStivaDeMasini(/*stiva*/) {
@@ -118,18 +132,51 @@ int size(/*stiva*/) {
 //QUEUE
 //Alegeti prin ce veti reprezenta coada si creati structura necesara acestei cozi
 //putem reprezenta o coada prin LSI, LDI sau vector
-void enqueue(/*coada*/ Masina masina) {
+void enqueue(ListaDMasina* coada, Masina masina) {
+
 	//adauga o masina in coada
+	//inserare la sfarsit
+	NodDublu* newNod = (NodDublu*)malloc(sizeof(NodDublu));
+	newNod->info = masina;
+	newNod->next = NULL;
+	newNod->prev = coada->last;
+	if (coada->last) {
+		coada->last->next = newNod;
+	}
+	else {
+		coada->first = newNod;
+	}
+	coada->last = newNod;
 }
 
-Masina dequeue(/*coada*/) {
+Masina dequeue(ListaD* coada) {
 	//extrage o masina din coada
+	Masina rezultat;
+	rezultat.id = -1;
+	if (coada->first) {
+		rezultat = coada->first->info;//shallow copy nu tre sa dezaloc inainte de free temp si din info
+		NodDublu* temp = coada->first;
+		coada->first = temp->next;
+		free(temp);
+
+	}
+	return rezultat;
 }
 
-void* citireCoadaDeMasiniDinFisier(const char* numeFisier) {
+ListaD citireCoadaDeMasiniDinFisier(const char* numeFisier) {
 	//functia primeste numele fisierului, il deschide si citeste toate masinile din fisier
 	//prin apelul repetat al functiei citireMasinaDinFisier()
 	//ATENTIE - la final inchidem fisierul/stream-ul
+	ListaD coada;
+	coada.first = coada.last = NULL;
+	FILE* f = fopen(numeFisier, "r");
+	if (f) {
+		while (!feof(f)) {
+			enqueue(&coada, citireMasinaDinFisier(f));
+		}
+		fclose(f);
+	}
+	return coada;
 }
 
 void dezalocareCoadaDeMasini(/*coada*/) {
@@ -138,13 +185,57 @@ void dezalocareCoadaDeMasini(/*coada*/) {
 
 
 //metode de procesare
-Masina getMasinaByID(/*stiva sau coada de masini*/int id);
+Masina getMasinaByID(Nod** stiva, int id) {
+	Masina rez;
+	rez.id = -1;
+	if ((*stiva) == NULL) {
+		Masina rezultat;
+		rezultat.id = -1;
+		return rezultat;
+	}
+	Nod* stivaNoua = NULL;
+	
+	while ((*stiva)) {
+		Masina masinaNoua = popStack(stiva);
+
+		if (masinaNoua.id == id) {
+			
+			rez = masinaNoua;
+			break;
+		}
+		else {
+			pushStack(&stivaNoua, masinaNoua);
+		}
+
+		
+
+	}
+	while ((stivaNoua)) {
+		pushStack(stiva, popStack(&stivaNoua));
+	}
+	return rez;
+}
 
 float calculeazaPretTotal(/*stiva sau coada de masini*/);
 
 int main() {
 	Nod* stiva = citireStackMasiniDinFisier("masini.txt");
 	afisareMasina(popStack(&stiva));
+	afisareMasina(popStack(&stiva));
+
+
+	afisareMasina(getMasinaByID(stiva, 7));
+
+	printf("coada\n");
+	ListaD coada = citireCoadaDeMasiniDinFisier("masini.txt");
+	afisareMasina(dequeue(&coada));
+	afisareMasina(dequeue(&coada));
+
+
+
+	//stiva prin toate vector lsi ldi vector
+	//coada prin toate vector lsi ldi vector
+
 
 	return 0;
 }
