@@ -97,6 +97,13 @@ void adaugaLaSfarsit(Nod** cap, Masina noua) {
 }
 //void adaugaLaInceput(Nod * *cap, Masina masinaNoua)
 //
+void adaugaLaInceput(Nod** cap, Masina nou) {
+	Nod* hai = (Nod*)malloc(sizeof(Nod));
+	hai->info = nou;
+	hai->next = *cap;
+	*cap = hai;
+
+}
 //-- -
 //5. Citire lista din fisier
 //
@@ -109,6 +116,16 @@ Nod* citireListaMasiniDinFisier(const char* numeFisier) {
 	while (!feof(f)) {
 		Masina m = citireMasinaDinFisier(f);
 		adaugaLaSfarsit(&cap,m);
+	}
+	fclose(f);
+	return cap;
+}
+Nod* citireListaMasiniDinFisier2(const char* numeFisier) {
+	FILE* f = fopen(numeFisier, "r");
+	Nod* cap = NULL;
+	while (!feof(f)) {
+		Masina m = citireMasinaDinFisier(f);
+		adaugaLaInceput(&cap, m);
 	}
 	fclose(f);
 	return cap;
@@ -167,6 +184,13 @@ void main() {
 
 	Nod* cap = citireListaMasiniDinFisier("masini.txt");
 	afisareListaMasini(cap);
+
+	Nod* cap2 = citireListaMasiniDinFisier2("masini.txt");
+	afisareListaMasini(cap2);
+
+
+
+
 
 
 }
