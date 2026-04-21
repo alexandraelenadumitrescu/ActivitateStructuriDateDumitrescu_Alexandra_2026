@@ -78,5 +78,8 @@
     <ClCompile Include="Seminar7-Practice3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Practice1-Hash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

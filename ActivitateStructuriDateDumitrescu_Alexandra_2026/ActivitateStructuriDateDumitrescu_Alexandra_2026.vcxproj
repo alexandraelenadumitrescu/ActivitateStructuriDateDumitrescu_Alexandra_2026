@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Practice1-Hash.c" />
     <ClCompile Include="Seminar1-Practice1.c" />
     <ClCompile Include="Seminar1-Practice2.c" />
     <ClCompile Include="Seminar1-Practice3.c" />
