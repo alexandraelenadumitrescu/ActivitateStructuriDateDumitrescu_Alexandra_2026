@@ -81,7 +81,7 @@
     <ClCompile Include="Practice1-Hash.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Practice2.c">
+    <ClCompile Include="Practice2-Queue.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Seminar8.c">
