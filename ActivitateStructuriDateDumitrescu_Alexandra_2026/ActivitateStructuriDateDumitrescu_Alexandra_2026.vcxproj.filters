@@ -90,5 +90,8 @@
     <ClCompile Include="Practice3-Stack.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Practice4-Hash-Chaining.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
