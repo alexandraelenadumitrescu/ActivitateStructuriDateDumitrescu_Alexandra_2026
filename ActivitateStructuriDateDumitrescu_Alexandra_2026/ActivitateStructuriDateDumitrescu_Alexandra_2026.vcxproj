@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Practice1-Hash.c" />
     <ClCompile Include="Practice2-Queue.c" />
+    <ClCompile Include="Practice3-Stack.c" />
     <ClCompile Include="Seminar1-Practice1.c" />
     <ClCompile Include="Seminar1-Practice2.c" />
     <ClCompile Include="Seminar1-Practice3.c" />
