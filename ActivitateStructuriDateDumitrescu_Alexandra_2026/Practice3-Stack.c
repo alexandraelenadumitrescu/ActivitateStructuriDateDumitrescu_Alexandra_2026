@@ -39,7 +39,7 @@
 //		Nod* temp = *cap;
 //		m = (*cap)->info;
 //		*cap = (*cap)->next;
-//		free(temp->info.numeSofer);
+//		free(temp->info.numeSofer);//atentie e shallow si dezaloc aiurea
 //		free(temp->info.model);
 //		free(temp);
 //	}

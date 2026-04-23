@@ -1,0 +1,5 @@
+lg,100,20
+producator2,100,10
+sony,100,20
+producator4,100,20
+samsung,100,20

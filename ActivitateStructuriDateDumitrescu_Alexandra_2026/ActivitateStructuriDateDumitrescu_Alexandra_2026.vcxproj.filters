@@ -96,5 +96,20 @@
     <ClCompile Include="Practice5-LSI.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Practice6-LDI.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hai.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hai2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hai3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_hash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

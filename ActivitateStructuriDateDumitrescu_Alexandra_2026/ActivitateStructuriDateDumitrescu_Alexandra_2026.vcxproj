@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="hai3.c" />
     <ClCompile Include="Practice1-Hash.c" />
     <ClCompile Include="Practice2-Queue.c" />
     <ClCompile Include="Practice3-Stack.c" />
     <ClCompile Include="Practice4-Hash-Chaining.c" />
     <ClCompile Include="Practice5-LSI.c" />
+    <ClCompile Include="Practice6-LDI.c" />
     <ClCompile Include="Seminar1-Practice1.c" />
     <ClCompile Include="Seminar1-Practice2.c" />
     <ClCompile Include="Seminar1-Practice3.c" />
@@ -154,6 +156,9 @@
     <ClCompile Include="Seminar7-Practice3.c" />
     <ClCompile Include="Seminar7.c" />
     <ClCompile Include="Seminar8.c" />
+    <ClCompile Include="hai.c" />
+    <ClCompile Include="hai2.c" />
+    <ClCompile Include="test_hash.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
