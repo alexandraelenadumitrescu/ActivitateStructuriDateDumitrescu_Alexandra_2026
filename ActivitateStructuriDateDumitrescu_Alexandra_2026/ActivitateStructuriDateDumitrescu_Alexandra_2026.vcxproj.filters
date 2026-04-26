@@ -111,7 +111,10 @@
     <ClCompile Include="test_hash.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Seminar8-Practice5.c">
+    <ClCompile Include="Seminar8-Practice1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Seminar8-Practice2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
