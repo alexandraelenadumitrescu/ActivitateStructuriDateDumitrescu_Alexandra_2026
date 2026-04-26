@@ -111,5 +111,8 @@
     <ClCompile Include="test_hash.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Seminar8-Practice5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
