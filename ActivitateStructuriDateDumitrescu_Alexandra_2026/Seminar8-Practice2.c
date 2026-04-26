@@ -30,11 +30,11 @@ struct Nod {
     struct Nod* drp;
     Produs info;
 };
+typedef struct Nod Nod;
 
 //Citește produsele dintr - un fișier și construiește un ABC după nume(cheie)
 
 Produs citire(FILE* f) {
-
 
     char buffer[100];
     char sep[5] = ", \n";
@@ -59,8 +59,64 @@ Produs citire(FILE* f) {
     return p;
 }
 
+void inserareABC(Nod** radacina, Produs p) {
+    if (*radacina) {
+        if (p.pret < (*radacina)->info.pret) {
+            inserareABC(&(*radacina)->stg, p);
+        }
+        else {
+            inserareABC(&(*radacina)->drp, p);
+        }
+       
+        
+    }
+    else {
+        Nod* nou = (Nod*)malloc(sizeof(Nod));
+        nou->info = p;
+        nou->stg = NULL;
+        nou->drp= NULL;
+        (*radacina)=nou;
+    }
+}
 
+Nod* citireABC(const char* numeFisier) {
+    FILE* f = fopen(numeFisier, "r");
+    Nod* radacina = NULL;
+    while (!feof(f)) {
+        inserareABC(&radacina, citire(f));
+    }
+    return radacina;
+}
+
+void afisare(Produs p) {
+    printf("%s %s %d %5.2f\n", p.nume, p.brand, p.stoc, p.pret);
+}
+
+void afisareABC(Nod* radacina) {
+    if (radacina) {
+        afisareABC(radacina->stg);
+        afisareABC(radacina->drp);
+        afisare(radacina->info);
+    }
+    
+}
+
+void cautaNume(Nod* radacina, char* nume) {
+    if (radacina) {
+        if (strcmp(radacina->info.nume, nume) == 0) {
+            afisare(radacina->info);
+        }
+        cautaNume(radacina->stg,nume);
+        cautaNume(radacina->drp,nume);
+    }
+    
+}
 
 void main() {
+
+    Nod* radacina = citireABC("inventory.txt");
+    afisareABC(radacina);
+    cautaNume(radacina, "Thinkpad");
+
 
 }
