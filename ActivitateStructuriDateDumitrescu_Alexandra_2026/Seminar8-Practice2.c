@@ -116,7 +116,7 @@ void main() {
 
     Nod* radacina = citireABC("inventory.txt");
     afisareABC(radacina);
-    cautaNume(radacina, "Thinkpad");
+    cautaNume(radacina, "ThinkPad");
 
 
 }
