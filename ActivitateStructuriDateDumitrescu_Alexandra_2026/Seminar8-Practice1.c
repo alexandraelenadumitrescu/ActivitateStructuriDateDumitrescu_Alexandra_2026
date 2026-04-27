@@ -189,6 +189,8 @@
 //
 //	afisareMasina(getMasinaByID(radacina, 5));
 //
+//	printf("\n nr noduri: %d\n ", determinaNumarNoduri(radacina));
+//
 //	printf("%5.2f\n pret total", calculeazaPretTotal(radacina));
 //	printf("%5.2f\n pret total", calculeazaPretulMasinilorUnuiSofer(radacina,"Ionescu"));
 //

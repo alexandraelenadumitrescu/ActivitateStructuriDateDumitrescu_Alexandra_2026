@@ -112,11 +112,97 @@ void cautaNume(Nod* radacina, char* nume) {
     
 }
 
+//Calculează prețul total al tuturor produselor din stoc(stoc * pret pentru fiecare)
+float pretTotal(Nod* radacina) {
+    float s = 0;
+    if (radacina) {
+        s += pretTotal(radacina->stg);
+        s += pretTotal(radacina->drp);
+        s += radacina->info.pret*radacina->info.stoc;
+    }
+    return s;
+}
+
+//Calculează prețul total al produselor unui brand dat(ex: toate produsele Apple)
+float pretBrand(Nod* radacina, char* brand) {
+    float s = 0;
+    if (radacina) {
+        s += pretBrand(radacina->stg, brand);
+        s += pretBrand(radacina->drp, brand);
+        if (strcmp(radacina->info.brand, brand) == 0) {
+            s += radacina->info.pret * radacina->info.stoc;
+        }
+    }
+    return s;
+}
+//Determină numărul total de noduri din arbore
+int nrNoduriArbore(Nod* radacina) {
+    if (radacina) {
+        return nrNoduriArbore(radacina->stg) + nrNoduriArbore(radacina->drp) + 1;
+    }
+    return 0;
+}
+
+//Calculează înălțimea arborelui
+int inaltime(Nod* radacina) {
+    if (radacina) {
+        return inaltime(radacina->stg) > inaltime(radacina->drp) ? inaltime(radacina->stg) + 1 : inaltime(radacina->drp) + 1;
+    }
+}
+
+//Găsește produsul cel mai scump din arbore
+void maxim(Nod* radacina) {
+    if (radacina) {
+        
+        if (radacina->drp==NULL) {
+            afisare( radacina->info);
+        }
+        else {
+            maxim(radacina->drp);
+        }
+    }
+}
+
+void dezalocare(Nod** radacina) {
+    if (*radacina) {
+        dezalocare(&(*radacina)->stg);
+        dezalocare(&(*radacina)->drp);
+        free((*radacina)->info.nume);
+        free((*radacina)->info.brand);
+        free(*radacina);
+        *radacina = NULL;
+    }
+    
+}
+
+//Găsește produsul cu cel mai mare stoc
+int stocMaxim(Nod* radacina) {
+    
+    if (radacina) {
+        int maxS = stocMaxim(radacina->stg);
+        int maxD= stocMaxim(radacina->drp);
+        int max = radacina->info.stoc;
+        if (maxS > max) max = maxS;
+        if (maxD > max) max = maxD;
+        return max;
+    }
+    return 0;
+
+}
+
 void main() {
 
     Nod* radacina = citireABC("inventory.txt");
     afisareABC(radacina);
     cautaNume(radacina, "ThinkPad");
+    printf("%5.2f\n", pretTotal(radacina));
+    printf("%5.2f\n", pretBrand(radacina,"Apple"));
+    printf("%d\n", nrNoduriArbore(radacina));
+    printf("%d\n", inaltime(radacina));
+    maxim(radacina);
+    printf("%d\n", stocMaxim(radacina));
+    dezalocare(&radacina);
+    afisareABC(radacina);
 
 
 }
