@@ -139,6 +139,7 @@
     <ClCompile Include="Seminar1-Practice3.c" />
     <ClCompile Include="Seminar1-Practice4.c" />
     <ClCompile Include="Seminar1.c" />
+    <ClCompile Include="Seminar10.c" />
     <ClCompile Include="Seminar2-Practice1.c" />
     <ClCompile Include="Seminar2.c" />
     <ClCompile Include="Seminar3-Practice1.c" />
