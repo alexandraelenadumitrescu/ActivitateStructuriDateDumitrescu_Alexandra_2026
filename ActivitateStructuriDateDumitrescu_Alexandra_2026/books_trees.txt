@@ -1,0 +1,7 @@
+10,1954,45.50,The Lord of the Rings,J.R.R. Tolkien,A
+20,1949,35.00,1984,George Orwell,A
+30,1937,25.00,The Hobbit,J.R.R. Tolkien,B
+5,1925,29.99,The Great Gatsby,F. Scott Fitzgerald,C
+3,1813,15.75,Pride and Prejudice,Jane Austen,A
+15,1960,18.20,To Kill a Mockingbird,Harper Lee,F
+12,1951,22.40,The Catcher in the Rye,J.D. Salinger,A

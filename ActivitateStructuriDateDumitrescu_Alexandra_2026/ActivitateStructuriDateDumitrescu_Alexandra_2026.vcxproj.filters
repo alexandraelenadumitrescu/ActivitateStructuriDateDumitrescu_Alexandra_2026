@@ -126,5 +126,8 @@
     <ClCompile Include="Seminar11.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Practice7-AVL.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
