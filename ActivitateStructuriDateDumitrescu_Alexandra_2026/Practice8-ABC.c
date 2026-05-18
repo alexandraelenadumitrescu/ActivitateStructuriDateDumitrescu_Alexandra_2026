@@ -2,7 +2,7 @@
 //==========================================================
 #include<stdio.h>
 #include<string.h>
-#include<malloc.h>
+#include<stdlib.h>
 typedef struct {
     int id;
     char* nume;
@@ -35,21 +35,23 @@ Angajat citire(FILE* f) {
 
     Angajat a;
     char buffer[100];
-    char sep[3] = ",\n";
+    char sep[4] = ",\n";
 
     fgets(buffer, 100, f);
     char* aux = strtok(buffer, sep);
     a.id = atoi(aux);
 
     aux = strtok(NULL, sep);
-    a.id = (char*)malloc(strlen(aux) + 1);;
-    strcpy(a.id, aux);
+    a.nume = (char*)malloc(strlen(aux) + 1);;
+    strcpy(a.nume, aux);
 
     aux = strtok(NULL, sep);
     a.salariu = atof(aux);
 
     return a;
 }
+
+
 //
 //2.[Inserare]
 //    Implementeaza functia :
@@ -86,12 +88,49 @@ void inserare(Nod** radacina, Angajat a) {
 //    void afisareInordine(Nod * radacina);
 //Parcurgere: st → nod → dr.
 //Rezultat : angajatii afisati in ordine crescatoare dupa id.
+void afisare(Angajat a) {
+    printf("id: %d nume: %s salariu: %.2f\n", a.id, a.nume, a.salariu);
+}
+
+void afisareInordine(Nod* radacina) {
+    if (radacina) {
+        afisareInordine(radacina->st);
+        afisare(radacina->info);
+        afisareInordine(radacina->dr);
+    }
+}
+
+Nod* citireDinFisier(const char* numeFisier) {
+    FILE* f = fopen(numeFisier, "r");
+    Nod* radacina = NULL;
+    while (!feof(f)) {
+        inserare(&radacina, citire(f));
+    }
+    return radacina;
+}
 //
 //4.[Afisare preordine]
 //Implementeaza functia :
 //void afisarePreordine(Nod * radacina);
 //Parcurgere: nod → st → dr.
 //
+
+void afisarePreordine(Nod* radacina) {
+    if (radacina) {
+        afisare(radacina->info);
+        afisarePreordine(radacina->st);
+        
+        afisarePreordine(radacina->dr);
+    }
+}void afisarePostordine(Nod* radacina) {
+    if (radacina) {
+        afisarePostordine(radacina->st);
+        
+        afisarePostordine(radacina->dr);
+        afisare(radacina->info);
+
+    }
+}
 //5.[Afisare postordine]
 //Implementeaza functia :
 //void afisarePostordine(Nod * radacina);
@@ -102,7 +141,24 @@ void inserare(Nod** radacina, Angajat a) {
 //Nod * cautaDupaId(Nod * radacina, int id);
 //Returneaza pointerul la nodul gasit, sau NULL daca nu exista.
 //(Nu deep copy — returnezi direct nodul din arbore.)
-//
+Nod* cauta(Nod* radacina, int id) {
+    if (radacina) {
+        if (radacina->info.id == id) {
+            return radacina;
+        }
+        else {
+            if (radacina->info.id < id) {
+                cauta(radacina->dr, id);
+            }
+            else {
+                cauta(radacina->st, id);
+            }
+        }
+    }
+    else {
+        return NULL;
+    }
+}
 //7.[Dezalocare]
 //    Implementeaza functia :
 //    void dezalocare(Nod * *radacina);
@@ -110,6 +166,15 @@ void inserare(Nod** radacina, Angajat a) {
 //        - Eliberezi free(nod->info.nume) inainte de free(nod).
 //        - La final setezi * radacina = NULL.
 //
+void dezalocare(Nod** radacina) {
+    if (*radacina) {
+        dezalocare(&(*radacina)->st);
+        dezalocare(&(*radacina)->dr);
+        free((*radacina)->info.nume);
+        free(*radacina);
+        *radacina = NULL;
+    }
+}
 //        ------------------------------------------------------------
 //        CERINTE BONUS
 //        ------------------------------------------------------------
@@ -135,7 +200,14 @@ void inserare(Nod** radacina, Angajat a) {
 //        ------------------------------------------------------------
 
         int main() {
-        //Nod* arbore = NULL;
+            Nod* arbore = citireDinFisier("angajati.txt");
+            afisareInordine(arbore);
+            afisarePreordine(arbore);
+            afisarePostordine(arbore);
+
+            afisare(cauta(arbore, 5)->info);
+
+            dezalocare(&arbore);
 
         // citire din fisier
         // afisare inordine
@@ -145,6 +217,8 @@ void inserare(Nod** radacina, Angajat a) {
         // afisare rezultat cautare
         // bonus: numar noduri, inaltime, salariu total
         // dezalocare
+
+
 
         return 0;
     }
