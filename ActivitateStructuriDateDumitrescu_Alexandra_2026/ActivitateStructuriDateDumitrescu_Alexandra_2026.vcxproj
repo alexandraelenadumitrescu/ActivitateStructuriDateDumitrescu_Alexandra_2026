@@ -135,6 +135,7 @@
     <ClCompile Include="Practice5-LSI.c" />
     <ClCompile Include="Practice6-LDI.c" />
     <ClCompile Include="Practice7-AVL.c" />
+    <ClCompile Include="Practice8-ABC.c" />
     <ClCompile Include="Seminar1-Practice1.c" />
     <ClCompile Include="Seminar1-Practice2.c" />
     <ClCompile Include="Seminar1-Practice3.c" />

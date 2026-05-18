@@ -129,5 +129,8 @@
     <ClCompile Include="Practice7-AVL.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Practice8-ABC.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

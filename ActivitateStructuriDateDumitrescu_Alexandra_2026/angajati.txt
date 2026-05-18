@@ -1,0 +1,7 @@
+3,Popescu Ion,4500.00
+1,Ionescu Maria,7200.50
+5,Dumitrescu Andrei,3800.00
+2,Constantin Elena,9100.75
+7,Gheorghe Mihai,5300.00
+4,Stan Cristina,6750.25
+6,Popa Alexandru,4100.00
