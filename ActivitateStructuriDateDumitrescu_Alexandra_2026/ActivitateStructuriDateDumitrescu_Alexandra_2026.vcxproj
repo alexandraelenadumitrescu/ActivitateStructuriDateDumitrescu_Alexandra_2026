@@ -129,6 +129,8 @@
   <ItemGroup>
     <ClCompile Include="hai3.c" />
     <ClCompile Include="Practice1-Hash.c" />
+    <ClCompile Include="Practice10-AVL.c" />
+    <ClCompile Include="Practice11-ABC.c" />
     <ClCompile Include="Practice2-Queue.c" />
     <ClCompile Include="Practice3-Stack.c" />
     <ClCompile Include="Practice4-Hash-Chaining.c" />
