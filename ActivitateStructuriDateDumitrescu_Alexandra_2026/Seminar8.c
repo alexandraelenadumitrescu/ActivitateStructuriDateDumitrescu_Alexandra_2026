@@ -88,21 +88,11 @@
 //	int pozMax = pozitieNod;
 //	if (pozStg<heap.nrElementeVizibile && heap.vector[pozStg].pret > heap.vector[pozMax].pret) {
 //		pozMax = pozStg;
-//
-//
 //	}
-//
-//
 //	if (pozDrp<heap.nrElementeVizibile && heap.vector[pozDrp].pret > heap.vector[pozMax].pret) {
 //		pozMax = pozDrp;
-//
-//
 //	}
-//
-//
 //	if (pozMax == pozitieNod) {
-//
-//
 //	}
 //	else {
 //		Masina aux;
@@ -112,8 +102,6 @@
 //		//daca poz max e parinte autoapelam
 //		if (pozMax < (heap.nrElementeVizibile - 2) / 2) {
 //			filtreazaHeap(heap, pozMax);
-//
-//
 //		}
 //	}
 //}
