@@ -138,5 +138,11 @@
     <ClCompile Include="Practice11-ABC.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Practice12-AVL.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Practice13-AVL.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
